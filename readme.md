@@ -116,9 +116,8 @@ Note: This should create about 20 resources per region once its done, so if 3 re
 
 ## 2. VPC Peering, Routing, security groups and Route53 
 
-#### Follow the steps [here](https://docs.aws.amazon.com/vpc/latest/peering/create-vpc-peering-connection.html#same-account-different-region) to create Peering Connection with VPCs in the same account and different Regions.  *Here are some key steps you have to do perform in order to ensure connectivity.*
+#### Follow the steps [here](https://docs.aws.amazon.com/vpc/latest/peering/create-vpc-peering-connection.html#same-account-different-region) to create Peering Connection with VPCs in the same account and different Regions.  *Here are some key steps you have to perform in order to ensure connectivity.*
 
-- You will need the requester VPC ID and Accepter VPC ID. 
 - Modify route tables in each VPCs 
    - `destination` = CIDR Block of other VPC
    - `target` = peering connection id
@@ -128,7 +127,7 @@ Note: This should create about 20 resources per region once its done, so if 3 re
 
 ## 3. Route53 and multiple Load Balancer connection
 
-Follow the setps [here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html) to create routing to load balancers.Routing policies let you choose how Route 53 routes traffic to your resources. If you have multiple resources that perform the same operation, such as serve content for a website, choose a routing policy other than simple. Here's a brief comparison:
+Follow the steps [here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html) to create routing to load balancers.Routing policies let you choose how Route 53 routes traffic to your resources. If you have multiple resources that perform the same operation, such as serve content for a website, choose a routing policy other than simple. Here's a brief comparison:
 
 - Simple: Simple records use standard DNS functionality.
 
