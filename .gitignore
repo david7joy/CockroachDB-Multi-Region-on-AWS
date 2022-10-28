@@ -1,0 +1,18 @@
+# Ignore the directories
+/certs
+/my-safe-directory
+
+# ignore below files 
+.env
+.txt
+scratchpad
+
+# ignore terraform files
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfvars
+
+# ignore private/secret files
+*.pem
