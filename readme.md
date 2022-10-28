@@ -93,7 +93,7 @@ https://www.cockroachlabs.com/docs/v22.1/deploy-cockroachdb-on-aws.html
 As we create more complex infrastructure configurations, managing everything in a single `main.tf` file is not ideal. Terraform provides `Modules` to repurpose and reuse same configuration, its like packages we can call and use. To learn more about modules and its advantages check [here](https://developer.hashicorp.com/terraform/tutorials/modules/module).
 
 - We have created a module called `infra_module` in `modules` folder. We will be referencing this module in the `main.tf` file. 
-- Modify `providers.tf` file and to configure each region where you want to create infrastructure.
+- Modify `providers.tf` file to configure each region where you want to create infrastructure.
 - Make changes to `main.tf` file and modify `variables.tf` file in the main directory to change configuration.
 
 ### Build steps
@@ -112,7 +112,7 @@ As we create more complex infrastructure configurations, managing everything in 
 
 3. Go to `AWS Cloud Console` and verify all the infrastructure is build as expected. 
 
-Note: This should creat about 20 resources per region once its done, so if 3 regions then 60 resources. 
+Note: This should create about 20 resources per region once its done, so if 3 regions then 60 resources. 
 
 ## 2. VPC Peering, Routing, security groups and Route53 
 
