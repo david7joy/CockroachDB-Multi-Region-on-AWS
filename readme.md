@@ -143,7 +143,7 @@ Follow the steps [here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuid
 
 - Multivalue answer: Multivalue answer records let you configure Route 53 to return multiple values, such as IP addresses for your web servers, in response to DNS queries.
 
-We used weighted routing in our architecture, but feel free to modify it for your need. 
+`We used weighted routing in our architecture, but feel free to modify it for your need.`
 
 ## 4. Setting up a VPN Tunnel for secure remote access
 
