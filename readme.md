@@ -214,7 +214,7 @@ Also, to log into the db console you will need a user. Its recommended to create
 
 ## 7. Workload testing 
 
-We can run the workload against a single aws load balancer in a region or we can run it against the route53 DNS that we created earliar. What you do just depends on what you want to test. In production, ideally you will use route53 and design your routing strategy per use cases or requirement. For this we need the IP address or DNS of the load balancer or Route53 DNS. So, feel free to test whats best for your need.
+We can run the workload against a `single aws load balancer` in a region or we can run it against the `route53 DNS` that we created earliar. What you do just depends on what you want to test. In `production, ideally you will use route53` and design your routing strategy per use cases or requirement. For this we need the `IP address or DNS of the load balancer or Route53 DNS. So, feel free to test whats best for your need.`
 
 - For Application Load Balancers and Network Load Balancers, use the following command to find the load-balancer-id and DNS, alternatively you can get this info from details in console for load balancer:
 
