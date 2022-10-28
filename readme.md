@@ -69,7 +69,7 @@ This is divided into 5 parts
 - Infrastucture build using terraform for multiple regions
   - Modules in Terraform
 - VPC Peering, routing and security groups for multi-region
-  - *Route 53 Configuration
+- Route53 and multiple Load Balancer connection
 - Setting up a VPN Tunnel for secure remote access
 - Installing and setting up CockroachDB
 - Starting CockroachDB
@@ -114,7 +114,7 @@ As we create more complex infrastructure configurations, managing everything in 
 
 Note: This should creat about 20 resources per region once its done, so if 3 regions then 60 resources. 
 
-## 2. VPC Peering, Routing, security groups and Route53 t
+## 2. VPC Peering, Routing, security groups and Route53 
 
 #### Follow the steps [here](https://docs.aws.amazon.com/vpc/latest/peering/create-vpc-peering-connection.html#same-account-different-region) to create Peering Connection with VPCs in the same account and different Regions.  *Here are some key steps you have to do perform in order to ensure connectivity.*
 
@@ -175,7 +175,7 @@ Note : This step is only needed if you want to create a VPN Tunnel for secure ac
 4. These step can vary depending on how you want to configure the cluster. You can setup the cluster either insecure or secure. Follow the [secure](https://www.cockroachlabs.com/docs/v22.1/deploy-cockroachdb-on-aws.html#step-5-generate-certificates 
 ) cluster creation steps. 
 
-## 3. Starting CockroachDB
+## 6. Starting CockroachDB
 
 Follow the steps described [here](https://www.cockroachlabs.com/docs/v22.1/deploy-cockroachdb-on-aws.html#step-6-start-nodes). Below are some key things you need to do after you install cockroach binary on your local machine. 
 
@@ -195,7 +195,11 @@ Follow the steps described [here](https://www.cockroachlabs.com/docs/v22.1/deplo
     
     This should show all the nodes that are running in the cluster. If 9 then 9 nodes. 
 
-4. You can also, go to https://ip-any-node:8080 - This should take you a db console. Also, to log into the db console you will need a user. Its recommended to create a new user with password, as below. 
+4. You can also, go to https://ip-any-node:8080 - This should take you a db console. Example below of 9 nodes across 3 regions.
+
+![Running](Images/Cluster.png)
+
+Also, to log into the db console you will need a user. Its recommended to create a new user with password, as below. 
 
          
         (In Local) 
@@ -209,7 +213,7 @@ Follow the steps described [here](https://www.cockroachlabs.com/docs/v22.1/deplo
 
     Note : Since we have a self signed certificate the browser may show that its insecure connection .To solve this in production, you can use a separate ui.crt/ui.key that is signed by some known cert authority (Verisign or whatever) -- if you do this, the DB Console will use that key/cert pair for its TLS while the CRDB nodes will still use the node certs signed by your self-signed cert.
 
-## 4. Workload testing 
+## 7. Workload testing 
 
 We can run the workload against a single aws load balancer in a region or we can run it against the route53 DNS that we created earliar. What you do just depends on what you want to test. In production, ideally you will use route53 and design your routing strategy per use cases or requirement. For this we need the IP address or DNS of the load balancer or Route53 DNS. So, feel free to test whats best for your need.
 
