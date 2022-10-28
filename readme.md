@@ -65,7 +65,7 @@ Terraform enables users to plan, create, and manage infrastructure as code. Ther
 
 # Deploying a CockroachDB Cluster across Multi-Region 
 
-This is divided into 5 parts
+This is divided into 7 parts
 - Infrastucture build using terraform for multiple regions
   - Modules in Terraform
 - VPC Peering, routing and security groups for multi-region
