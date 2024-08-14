@@ -5,8 +5,8 @@ This repo provides you with the ability to launch a Multi-region(topology) Cockr
 We are going to use the following tools to launch this cluster.
 
 - [CockroachDB](https://www.cockroachlabs.com/docs/stable/frequently-asked-questions.html#what-is-cockroachdb) - Scalable & Resilient Distributed SQL Database that can survive anything.
-- [AWS Cloud](https://aws.amazon.com/) -  Cloud Infrastucture to host a single region of CRDB
-- [Terraform](https://www.terraform.io/intro) - To automate infrasturture build on AWS
+- [AWS Cloud](https://aws.amazon.com/) -  Cloud Infrastructure to host a single region of CRDB
+- [Terraform](https://www.terraform.io/intro) - To automate infrastructure build on AWS
 - [PSSH](https://linux.die.net/man/1/pssh) - Parallel SSH tool to install and setup cockroachDB on AWS EC2 Instance
 - [AWS Client VPN](https://aws.amazon.com/vpn/client-vpn/) - If you want to create a secure remote access to AWS Cloud from client machines
 
@@ -35,12 +35,13 @@ Note:
 - Change variables as needed in `variables.tf`
 
 # Housekeeping : 
-- Last Updated on 28/10/2022
+- Last Updated on 08/14/2024
 - Terraform version : 1.3.1
+- Instance types : Linux2
 
-# Pre-requsites:
+# Pre-requisites:
 
-The following pre-reqs need to be setup in advance for using this repo: 
+The following pre-requisites need to be setup in advance for using this repo: 
 
 - [Install Terraform](https://www.terraform.io/downloads) on local machine
 - [Install and configure](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) AWS CLI properly on local machine 
@@ -66,7 +67,7 @@ Terraform enables users to plan, create, and manage infrastructure as code. Ther
 # Deploying a CockroachDB Cluster across Multi-Region 
 
 This is divided into 7 parts
-- Infrastucture build using terraform for multiple regions
+- Infrastructure build using terraform for multiple regions
   - Modules in Terraform
 - VPC Peering, routing and security groups for multi-region
 - Route53 and multiple Load Balancer connection
@@ -78,7 +79,7 @@ This is divided into 7 parts
 Read the below documentation for detailed understanding. 
 https://www.cockroachlabs.com/docs/v22.1/deploy-cockroachdb-on-aws.html
 
-## 1. Infrastucture Build 
+## 1. Infrastructure Build 
 
 - [EC2 Instance](https://www.cockroachlabs.com/docs/v22.1/deploy-cockroachdb-on-aws.html#step-1-create-instances) 
 - VPC 
@@ -95,6 +96,7 @@ As we create more complex infrastructure configurations, managing everything in 
 - We have created a module called `infra_module` in `modules` folder. We will be referencing this module in the `main.tf` file. 
 - Modify `providers.tf` file to configure each region where you want to create infrastructure.
 - Make changes to `main.tf` file and modify `variables.tf` file in the main directory to change configuration.
+- If you would like to change the `regions` then consider updating the AMI's to latest. You can also find more information on the latest AMIs available from the `AMI Catalog`
 
 ### Build steps
 
@@ -133,7 +135,7 @@ Follow the steps [here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuid
 
 - Weighted: Weighted records let you specify what portion of traffic to send to each resource.
 
-- Geolocation: Geolocation records let you route traffic to your resources based on the geographic location of your users.
+- Geo-location: Geo-location records let you route traffic to your resources based on the geographic location of your users.
 
 - Latency: Latency records let you route traffic to resources in the AWS Region that provides the lowest latency. All resources must be in AWS Regions.
 
@@ -153,7 +155,7 @@ Note : This step is only needed if you want to create a VPN Tunnel for secure ac
 
 
 1. Generate server and client certificates and keys - [Detailed steps here](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html#mutual)
-2. Create a Client VPN endpoint, assocaite the target network you created in terraform and associate subnets.
+2. Create a Client VPN endpoint, associate the target network you created in terraform and associate subnets.
 3. Verify that your default security group and terraform created security groups are added.
 4. Add Authorization rule for VPC
 5. Download Client VPN end point configuration and setup a profile in client VPN.
@@ -214,7 +216,7 @@ Also, to log into the db console you will need a user. Its recommended to create
 
 ## 7. Workload testing 
 
-We can run the workload against a `single aws load balancer` in a region or we can run it against the `route53 DNS` that we created earliar. What you do just depends on what you want to test. In `production, ideally you will use route53` and design your routing strategy per use cases or requirement. For this we need the `IP address or DNS of the load balancer or Route53 DNS. So, feel free to test whats best for your need.`
+We can run the workload against a `single aws load balancer` in a region or we can run it against the `route53 DNS` that we created earlier. What you do just depends on what you want to test. In `production, ideally you will use route53` and design your routing strategy per use cases or requirement. For this we need the `IP address or DNS of the load balancer or Route53 DNS. So, feel free to test whats best for your need.`
 
 - For Application Load Balancers and Network Load Balancers, use the following command to find the load-balancer-id and DNS, alternatively you can get this info from details in console for load balancer:
 
